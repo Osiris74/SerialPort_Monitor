@@ -1,0 +1,8 @@
+Project2.lpi Note: Added defines -dBorland -dVer150 -dDelphi7 -dCompiler6_Up -dPUREPASCAL in custom options
+ Progress: Found all unit files
+Project2.lpr(1,18) Note: Added MODE Delphi syntax modifier after unit name.
+ : 
+ : *** Converting unit files belonging to project/package ***
+ : 
+ : *** Fixing used units and Repairing form files ***
+ : Conversion Ready.

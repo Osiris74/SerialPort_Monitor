@@ -4,14 +4,33 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ComCtrls, ComObj, ExtCtrls, Buttons;
+  Dialogs, StdCtrls, ComCtrls, ComObj, ExtCtrls, Buttons, LazSerial, StrUtils;
+
+
+type
+  TWMCopyData = packed record
+    Msg: Cardinal;
+    From: HWND;
+    CopyDataStruct: PCopyDataStruct;
+    Result: Longint;
+  end;
+
 
 const
   cmRxByte = wm_User+$55;
   WM_COPYDATA = wm_User+$3000;
 
 type
+
+  { TForm1 }
+
   TForm1 = class(TForm)
+    LazSerial1: TLazSerial;
+    C: TRadioButton;
+    M: TRadioButton;
+    A: TRadioButton;
+    S: TRadioButton;
+    RadioGroup1: TRadioGroup;
     TxEdit: TEdit;
     StatusBar1: TStatusBar;
     SpeedBox: TComboBox;
@@ -28,6 +47,8 @@ type
     SpeedButton2: TSpeedButton;
     RxMem: TMemo;
     SpeedButton3: TSpeedButton;
+    procedure LazSerial1RxData(Sender: TObject);
+    procedure MChange(Sender: TObject);
     procedure RecivBytes(var Msg : TMessage); message cmRxByte;
     procedure PortBoxEnter(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -63,15 +84,25 @@ uses MyComm;
    sText: array[0..49] of Char;
    i:integer;
    tmp:String;
+
+   s: PChar;
  begin                                   
    // generate text from parameter
   // anzuzeigenden Text aus den Parametern generieren
+
+
+  s := PChar(Msg.CopyDataStruct.lpData) ;
+
+  RxMem.Lines.Add(s);
+   {
   StrLCopy(sText, Msg.CopyDataStruct.lpData, Msg.CopyDataStruct.cbData);
    // write received text
    for i:=0 to 49 do begin
     tmp:=tmp+sText[i];
    end;
   RxMem.Lines.Add(tmp);
+  end;
+  }
  end;
 
       procedure TForm1.RecivBytes(var Msg: TMessage);   //Messages from second thread
@@ -96,6 +127,39 @@ uses MyComm;
                     end;
               end;
           end;
+
+procedure TForm1.LazSerial1RxData(Sender: TObject);
+var
+ i : integer;
+ str : String;
+ arr : array of char;
+ data : string;
+ tmp : integer;
+begin
+ str := '';
+ //for i := 0 to LazSerial1.ReadData.Length do
+ // begin
+ //      str += IntToStr(Ord(LazSerial1.ReadData.Chars[i]));
+ // end;
+ //     RxMem.Lines.Add(str);
+
+ data := LazSerial1.ReadData;
+ arr := data.ToCharArray(0, data.Length - 1);
+
+  for i := 1 to data.Length do
+  begin
+       //tmp := Ord(arr[i]);
+       str := str + '$' + IntToHex(Ord(data[i]), 2);
+  end;
+
+  RxMem.Lines.Add(str);
+  //RxMem.Lines.Add(data);
+end;
+
+procedure TForm1.MChange(Sender: TObject);
+begin
+
+end;
 
 //===================================RecivBytes===================================
 
@@ -152,6 +216,9 @@ uses MyComm;
           StopGroup.ItemIndex:=1;
           ParityBox.ItemIndex:=0;
           SpeedBox.ItemIndex:=0;
+
+          //OldWndProc := TMWndProc(Windows.GetWindowLong(Self.Handle, GWL_WNDPROC));
+          //Windows.SetWindowLong(Self.Handle, GWL_WNDPROC, LongInt(@MyWndProc));
       end;
 //==================================FormCreate====================================
 
@@ -174,26 +241,55 @@ uses MyComm;
     var
       stopbits:integer;
       begin
-            if StartService = true then ShowMessage('Com-Port Started Succesfully');
-            isStopped:=false;
+            //if StartService = true then ShowMessage('Com-Port Started Succesfully');
+            //isStopped:=false;
+
+            LazSerial1.Device := PortBox.Text;
+            LazSerial1.Open;
       end;
 
     procedure TForm1.FormClose(Sender: TObject; var Action: TCloseAction);
       begin
-          if isStopped=false then
-          StopService;
+          //if isStopped=false then
+          //StopService;
+          LazSerial1.Close;
       end;
 
     procedure TForm1.SpeedButton2Click(Sender: TObject);
+    var
+    temp : array [0..3] of byte;
+    str : String;
+    iTmp : Integer;
+    chr : char;
       begin
-          WriteStrToPort(TxEdit.Text);
+
+
+           str := TxEdit.Text;
+
+           if (TxEdit.Text <> '') then
+           iTmp := StrToInt(str);
+
+           if C.Checked then chr := 'C';
+           if M.Checked then chr := 'M';
+           if A.Checked then chr := 'A';
+           if S.Checked then chr := 'S';
+
+
+           //LazSerial1.WriteData(str);
+
+           temp[3] := (iTmp and $FF);
+           temp[2] := (iTmp and $FF00 shr 8);
+           temp[1] := (iTmp and $FF0000 shr 16);
+           temp[0] := Ord(chr);
+           LazSerial1.WriteBuffer(temp, 4);
       end;
 
 procedure TForm1.SpeedButton3Click(Sender: TObject);
 begin
-     StopService;
+     //StopService;
      ShowMessage('Com-Port Stopped Succesfully');
-     isStopped:=true;
+     //isStopped:=true;
+     LazSerial1.Close;
 end;
 
 end.

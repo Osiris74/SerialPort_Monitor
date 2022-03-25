@@ -1,64 +1,59 @@
 object Form1: TForm1
-  Left = 245
-  Top = 160
-  Width = 835
+  Left = 863
   Height = 471
+  Top = 224
+  Width = 835
   Caption = 'Form1'
+  ClientHeight = 471
+  ClientWidth = 835
   Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
-  Font.Style = []
-  OldCreateOrder = False
   OnClose = FormClose
   OnCreate = FormCreate
-  PixelsPerInch = 96
-  TextHeight = 13
+  LCLVersion = '2.0.8.0'
   object Label1: TLabel
     Left = 600
+    Height = 16
     Top = 104
     Width = 78
-    Height = 16
     Caption = 'Speed baud:'
-    Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
-    Font.Style = []
+    ParentColor = False
     ParentFont = False
   end
   object Label2: TLabel
     Left = 600
+    Height = 20
     Top = 56
     Width = 77
-    Height = 20
     Caption = 'COM Ports'
-    Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
     Font.Name = 'MS Sans Serif'
-    Font.Style = []
+    ParentColor = False
     ParentFont = False
   end
   object Label3: TLabel
     Left = 600
+    Height = 16
     Top = 304
     Width = 34
-    Height = 16
     Caption = 'Parity'
-    Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
-    Font.Style = []
+    ParentColor = False
     ParentFont = False
   end
   object SpeedButton1: TSpeedButton
     Left = 760
+    Height = 41
     Top = 368
     Width = 41
-    Height = 41
     Glyph.Data = {
       360C0000424D360C000000000000360000002800000020000000200000000100
       180000000000000C0000C40E0000C40E00000000000000000000FFFFFFFFFFFF
@@ -157,14 +152,15 @@ object Form1: TForm1
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
       FFF0F4F6D1DCE3C1D0DBC6D4DDE0E7ECFBFCFDFFFFFFFFFFFFFFFFFFFFFFFFFF
-      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+    }
     OnClick = SpeedButton1Click
   end
   object SpeedButton2: TSpeedButton
-    Left = 472
+    Left = 280
+    Height = 25
     Top = 40
     Width = 49
-    Height = 25
     Glyph.Data = {
       36080000424D3608000000000000360400002800000020000000200000000100
       08000000000000040000C40E0000C40E00000001000000000000000000000000
@@ -231,37 +227,37 @@ object Form1: TForm1
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+    }
     OnClick = SpeedButton2Click
   end
   object SpeedButton3: TSpeedButton
     Left = 592
+    Height = 41
     Top = 368
     Width = 41
-    Height = 41
     OnClick = SpeedButton3Click
   end
   object TxEdit: TEdit
     Left = 24
-    Top = 40
-    Width = 401
     Height = 21
+    Top = 40
+    Width = 233
     TabOrder = 0
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 413
-    Width = 819
-    Height = 19
+    Height = 28
+    Top = 443
+    Width = 835
     Panels = <>
   end
   object SpeedBox: TComboBox
     Left = 600
+    Height = 21
     Top = 120
     Width = 153
-    Height = 21
     ItemHeight = 13
-    TabOrder = 2
     Items.Strings = (
       '2400'
       '9600'
@@ -270,86 +266,180 @@ object Form1: TForm1
       '57600'
       '74880'
       '115200'
-      '250000')
+      '250000'
+    )
+    TabOrder = 2
   end
   object PortBox: TComboBox
     Left = 600
+    Height = 21
     Top = 80
     Width = 153
-    Height = 21
     ItemHeight = 13
-    TabOrder = 3
     OnEnter = PortBoxEnter
+    TabOrder = 3
   end
   object Button1: TButton
     Left = 448
+    Height = 25
     Top = 360
     Width = 75
-    Height = 25
     Caption = 'Clear memo'
-    TabOrder = 4
     OnClick = Button1Click
+    TabOrder = 4
   end
   object CheckBox1: TCheckBox
     Left = 24
+    Height = 19
     Top = 368
-    Width = 97
-    Height = 17
+    Width = 66
     Caption = 'Autoscroll'
     Checked = True
+    OnClick = CheckBox1Click
     State = cbChecked
     TabOrder = 5
-    OnClick = CheckBox1Click
   end
   object DataGroup: TRadioGroup
     Left = 600
+    Height = 73
     Top = 160
     Width = 153
-    Height = 73
+    AutoFill = True
     Caption = 'Data Bits'
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 2
+    ClientHeight = 55
+    ClientWidth = 149
     Columns = 2
     Items.Strings = (
       '5'
       '6'
       '7'
       '8   '
-      '9 ')
+      '9 '
+    )
     TabOrder = 6
   end
   object StopGroup: TRadioGroup
     Left = 600
+    Height = 49
     Top = 248
     Width = 153
-    Height = 49
+    AutoFill = True
     Caption = 'Stop Bits'
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 2
+    ClientHeight = 31
+    ClientWidth = 149
     Columns = 2
     Items.Strings = (
       '1 bit      '
-      '2 bits          ')
+      '2 bits          '
+    )
     TabOrder = 7
   end
   object ParityBox: TComboBox
     Left = 600
+    Height = 21
     Top = 320
     Width = 153
-    Height = 21
     ItemHeight = 13
-    TabOrder = 8
     Items.Strings = (
       'None'
       'Odd'
       'Even'
       'Mark'
-      'Space')
+      'Space'
+    )
+    TabOrder = 8
   end
   object RxMem: TMemo
     Left = 32
-    Top = 88
-    Width = 449
     Height = 241
+    Top = 88
+    Width = 304
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
     Lines.Strings = (
-      'RxMem')
+      'RxMem'
+    )
+    ParentFont = False
     ScrollBars = ssVertical
     TabOrder = 9
+  end
+  object RadioGroup1: TRadioGroup
+    Left = 360
+    Height = 224
+    Top = 96
+    Width = 152
+    AutoFill = True
+    Caption = 'RadioGroup1'
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 1
+    ClientHeight = 206
+    ClientWidth = 148
+    TabOrder = 10
+    object C: TRadioButton
+      Left = 6
+      Height = 52
+      Top = 0
+      Width = 136
+      Caption = 'C'
+      TabOrder = 0
+    end
+    object M: TRadioButton
+      Left = 6
+      Height = 52
+      Top = 52
+      Width = 136
+      Caption = 'M'
+      OnChange = MChange
+      TabOrder = 1
+    end
+    object A: TRadioButton
+      Left = 6
+      Height = 52
+      Top = 104
+      Width = 136
+      Caption = 'A'
+      TabOrder = 2
+    end
+    object S: TRadioButton
+      Left = 6
+      Height = 50
+      Top = 156
+      Width = 136
+      Caption = 'S'
+      TabOrder = 3
+    end
+  end
+  object LazSerial1: TLazSerial
+    Active = False
+    BaudRate = br256000
+    DataBits = db8bits
+    Parity = pNone
+    FlowControl = fcNone
+    StopBits = sbOne
+    Device = 'COM3'
+    RcvLineCRLF = False
+    OnRxData = LazSerial1RxData
+    left = 784
+    top = 8
   end
 end

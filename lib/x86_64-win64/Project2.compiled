@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Compiler Value="C:\lazarus\fpc\3.0.4\bin\x86_64-win64\fpc.exe" Date="1351366055"/>
+  <Params Value=" -Mdelphi -Scghi -O1 -g -gl -WG -l -vewnhibq -FuC:\lazarus\components\TLazSerial\lib\x86_64-win64 -FuC:\lazarus\components\ideintf\units\x86_64-win64\win32 -FuC:\lazarus\components\lazcontrols\lib\x86_64-win64\win32 -FuC:\lazarus\lcl\units\x86_64-win64\win32 -FuC:\lazarus\lcl\units\x86_64-win64 -FuC:\lazarus\components\lazutils\lib\x86_64-win64 -FuC:\lazarus\packager\units\x86_64-win64 -FuC:\_For_Alex\Project_Prog\LAZARUS_Projects\SerialPort_Monitor-master\ -FEC:\_For_Alex\Project_Prog\LAZARUS_Projects\SerialPort_Monitor-master\lib\x86_64-win64\ -oC:\_For_Alex\Project_Prog\LAZARUS_Projects\SerialPort_Monitor-master\lib\x86_64-win64\Project2.exe -dUseCThreads -dLCL -dLCLwin32 -dBorland -dVer150 -dDelphi7 -dCompiler6_Up -dPUREPASCAL Project2.lpr"/>
+</CONFIG>

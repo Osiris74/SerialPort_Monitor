@@ -4,6 +4,8 @@ interface
 
 uses Windows, SysUtils, Classes, ActiveX,ComObj,Variants,Serial_Port;
 
+CONST
+  CMD_SETLABELTEXT = 1; // ID 
 
 type
 
@@ -113,14 +115,22 @@ implementation
         Begin {ByteReaded>0}
         //Making string from recieved buffer        //Получаем строку байтов
               tmp:=HexToStr(MyBuff);                //Отправляем на преобразование
-       with aCopyData do
+
+      with aCopyData do
         begin
-          dwData :=0;
-          cbData :=StrLen(PChar(tmp))+1;
-          lpData := PChar(tmp);
+          dwData := CMD_SETLABELTEXT;
+          cbData := StrLen(PChar(tmp))+1;
+          GetMem(aCopyData.lpData, aCopyData.cbData);
         end;
-          pTemp:=PChar(HexToStr(MyBuff));
+
+      try
+          StrPCOpy(aCopyData.lpData, AnsiString(tmp));
+          //pTemp:=PChar(HexToStr(MyBuff));
           SendMessage(fmMain.Handle,WM_COPYDATA,longint(Handle),Longint(@aCopyData));
+
+      finally
+             FreeMem(aCopyData.lpData, aCopyData.cbData);
+      end;
 
       End; {ByteReaded>0}
 End; {QueryPort}
@@ -145,7 +155,7 @@ sum:byte;
       R:=R or (buf[0] shl 16);                  //Сдвигаем MSB в конец
 
       Result:=Result+'  STRING_DEC:  '+'$'+IntToStr(R); //Готовим финальную строку для отправки
-    if sum<>buf[3] then Result:='ERROR!  SUM IS INCORRECT';
+    //if sum<>buf[3] then Result:='ERROR!  SUM IS INCORRECT';
 
   end;
 
